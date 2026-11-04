@@ -1,0 +1,2 @@
+import {scoutAndProcess} from '../dist/index.js';
+try{const result=await scoutAndProcess({query:'rock',provider:'polyhaven',mode:'datauri',targetHeight:1,allowOverBudget:true});if(!result.dataUri||!result.meshes.length)throw new Error('Invalid live response');console.log(JSON.stringify({...result,dataUri:'[omitted]'},null,2));}catch(e){console.error('Live Poly Haven smoke failed:',e.message);process.exitCode=1;}

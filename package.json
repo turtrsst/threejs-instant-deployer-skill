@@ -1,0 +1,170 @@
+{
+  "name": "threejs-instant-deployer-skill",
+  "version": "1.0.0",
+  "description": "License-aware 3D asset scouting, precise GLB normalization, X-Ray introspection, and AST-powered Three.js deployment for agents.",
+  "type": "module",
+  "bin": {
+    "threejs-deploy-3d": "./scripts/scout-and-process.mjs",
+    "threejs-inject-3d": "./scripts/inject-three-code.mjs",
+    "threejs-deployer-mcp": "./scripts/mcp-server.mjs"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./browser": {
+      "types": "./dist/codeDeployer/runtime.d.ts",
+      "import": "./dist/codeDeployer/runtime.js"
+    },
+    "./bio-motion": {
+      "types": "./dist/codeDeployer/bioMotion.d.ts",
+      "import": "./dist/codeDeployer/bioMotion.js"
+    },
+    "./templates/*": "./templates/*",
+    "./boids": {
+      "types": "./dist/codeDeployer/boidsManager.d.ts",
+      "import": "./dist/codeDeployer/boidsManager.js"
+    },
+    "./underwater-fx": {
+      "types": "./dist/codeDeployer/underwaterFx.d.ts",
+      "import": "./dist/codeDeployer/underwaterFx.js"
+    },
+    "./instanced-boids": {
+      "types": "./dist/codeDeployer/instancedBoidsManager.d.ts",
+      "import": "./dist/codeDeployer/instancedBoidsManager.js"
+    },
+    "./underwater-postprocessing": {
+      "types": "./dist/codeDeployer/underwaterPostprocessing.d.ts",
+      "import": "./dist/codeDeployer/underwaterPostprocessing.js"
+    },
+    "./aquarium-director": {
+      "types": "./dist/codeDeployer/aquariumDirectorGui.d.ts",
+      "import": "./dist/codeDeployer/aquariumDirectorGui.js"
+    },
+    "./underwater-audio": {
+      "types": "./dist/codeDeployer/underwaterAudio.d.ts",
+      "import": "./dist/codeDeployer/underwaterAudio.js"
+    },
+    "./interactive-feeder": {
+      "types": "./dist/codeDeployer/interactiveFeeder.d.ts",
+      "import": "./dist/codeDeployer/interactiveFeeder.js"
+    },
+    "./day-night-cycle": {
+      "types": "./dist/codeDeployer/dayNightCycle.d.ts",
+      "import": "./dist/codeDeployer/dayNightCycle.js"
+    },
+    "./cinematic-camera-director": {
+      "types": "./dist/codeDeployer/cinematicCameraDirector.d.ts",
+      "import": "./dist/codeDeployer/cinematicCameraDirector.js"
+    },
+    "./underwater-surface": {
+      "types": "./dist/codeDeployer/underwaterSurface.d.ts",
+      "import": "./dist/codeDeployer/underwaterSurface.js"
+    }
+  },
+  "files": [
+    "dist",
+    "scripts",
+    "mcp-server",
+    "SKILL.md",
+    ".cursor",
+    "docs",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "examples/scene.js",
+    "tsconfig.json",
+    "SECURITY.md",
+    "CONTRIBUTING.md",
+    "templates",
+    "examples/aquarium.js",
+    "examples/underwater-aquarium.js",
+    "examples/instanced-aquarium.js",
+    "examples/cinematic-aquarium.js",
+    "examples/cinematic-main.js"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/build-templates.mjs",
+    "prepare": "npm run build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && npm run test:node && npm run test:jest",
+    "check": "npm run typecheck && npm test",
+    "scout": "node scripts/scout-and-process.mjs",
+    "inject": "node scripts/inject-three-code.mjs",
+    "mcp": "node scripts/mcp-server.mjs",
+    "demo:assets": "npm run build && node scripts/generate-fixtures.mjs && node scripts/build-demo.mjs",
+    "demo": "npm run demo:assets && vite --host 0.0.0.0 --port 5173",
+    "test:live": "npm run build && node scripts/live-smoke.mjs",
+    "bench:instanced": "npm run build && node scripts/benchmark-instanced.mjs",
+    "test:node": "node --test tests/*.test.mjs",
+    "test:jest": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "dependencies": {
+    "@babel/generator": "^7.28.5",
+    "@babel/parser": "^7.28.5",
+    "@babel/traverse": "^7.28.5",
+    "@babel/types": "^7.28.5",
+    "@gltf-transform/core": "^4.5.1",
+    "@gltf-transform/extensions": "^4.5.1",
+    "@gltf-transform/functions": "^4.5.1",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "draco3dgltf": "^1.5.7",
+    "meshoptimizer": "^1.3.0",
+    "parse5": "^8.0.0",
+    "sharp": "^0.35.5",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/babel__generator": "^7.27.0",
+    "@types/babel__traverse": "^7.28.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.19.0",
+    "@types/three": "0.180.0",
+    "jest": "^30.5.2",
+    "three": "0.180.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  },
+  "keywords": [
+    "threejs",
+    "agent-skills",
+    "claude-code",
+    "cursor",
+    "mcp",
+    "gltf-transform",
+    "webgl",
+    "glb",
+    "cc0"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/turtrsst/threejs-instant-deployer-skill.git"
+  },
+  "homepage": "https://github.com/turtrsst/threejs-instant-deployer-skill#readme",
+  "bugs": {
+    "url": "https://github.com/turtrsst/threejs-instant-deployer-skill/issues"
+  },
+  "peerDependencies": {
+    "three": ">=0.180.0 <0.181.0"
+  },
+  "peerDependenciesMeta": {
+    "three": {
+      "optional": true
+    }
+  },
+  "jest": {
+    "transform": {},
+    "testEnvironment": "node",
+    "testMatch": [
+      "<rootDir>/tests/deployer-core.test.js"
+    ],
+    "collectCoverageFrom": [
+      "dist/glbSurgeon/{normalizeBBox,xrayIntrospect,manifestSchema}.js"
+    ]
+  }
+}

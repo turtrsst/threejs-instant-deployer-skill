@@ -1,0 +1,2 @@
+import {fileURLToPath} from 'node:url';
+export default {root:'demo',build:{rollupOptions:{input:{instanced:fileURLToPath(new URL('./demo/instanced.html',import.meta.url)),boids:fileURLToPath(new URL('./demo/boids.html',import.meta.url)),main:fileURLToPath(new URL('./demo/index.html',import.meta.url)),bio:fileURLToPath(new URL('./demo/bio.html',import.meta.url))}}},server:{host:'0.0.0.0',allowedHosts:true}};
